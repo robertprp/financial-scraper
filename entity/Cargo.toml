@@ -1,0 +1,15 @@
+[package]
+name = "entity"
+version = "0.1.0"
+edition = "2021"
+
+[package.metadata.workspaces]
+independent = true
+
+[dependencies]
+sqlx = {workspace = true}
+chrono = { workspace = true }
+serde = { workspace = true }
+tokio = { workspace = true }
+serde_json = { workspace = true }
+reqwest = { workspace = true }

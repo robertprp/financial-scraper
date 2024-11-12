@@ -1,0 +1,15 @@
+[package]
+name = "service"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+sqlx = {workspace = true}
+chrono = { workspace = true }
+serde = { workspace = true }
+tokio = { workspace = true }
+serde_json = { workspace = true }
+reqwest = { workspace = true }
+lib = { path = "../lib" }
+entity = { path = "../entity" }
+csv = { workspace = true }
