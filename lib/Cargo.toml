@@ -7,12 +7,13 @@ publish = false
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-thiserror = { workspace = true }
-error-stack = { workspace = true }
-serde = { workspace = true }
-serde_json = { workspace = true }
-ethers = { workspace = true }
-tokio = { workspace = true }
-chrono = { workspace = true }
-hex = { workspace = true }
-bigdecimal = { workspace = true }
+thiserror = "2.0.1"
+error-stack = "0.5.0"
+serde = { version = "1.0.132", features = ["derive"] }
+serde_json = { version = "1.0.68", features = ["raw_value"] }
+ethers = { version = "2.0.14" }
+tokio = { version = "1.37.0", features = ["full", "rt"] }
+chrono = "0.4.24"
+hex = "0.4.3"
+bigdecimal = { version = "0.4.2", features = ["serde"] }
+

@@ -1,0 +1,22 @@
+[package]
+name = "graphql"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+async-graphql = { version = "7.0.11", features = ["rust_decimal", "chrono", "decimal"]}
+futures = "0.3.31"
+clap = "4.5.20"
+error-stack = "0.5.0"
+serde = "1.0.130"
+sqlx = { version = "0.7.4", features = ["postgres", "macros", "json", "uuid", "chrono", "rust_decimal", "bigdecimal", "runtime-tokio-rustls"] }
+serde_json = "1.0.68"
+axum = { version = "0.7.7"}
+tower-http = { version = "0.6.1", features = ["compression-full", "cors"] }
+tower = { version = "0.5.1", features = ["full"] }
+log = "0.4.22"
+service = { path = "../service" }
+linreg = { version = "0.2.0" }
+rust_decimal = "1.36.0"
+async-graphql-axum = "7.0.11"
+tokio = "1.41.1"

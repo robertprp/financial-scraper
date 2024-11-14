@@ -6,23 +6,31 @@ edition = "2021"
 [workspace]
 members = [
     ".",
-    "entity",
+    "entity", "graphql",
     "lib",
     "service",
 ]
 resolver = "2"
 
 [dependencies]
-[workspace.dependencies]
-sqlx = { version = "0.8.2", features = ["rust_decimal", "postgres", "chrono", "uuid", "runtime-tokio-native-tls"] }
-chrono = "0.4.38"
-serde = { version = "1.0.132", features = ["derive"] }
-serde_json = "1.0.132"
-reqwest = { version = "0.12.9", features = ["json"] }
-tokio = { version = "1.16.1", features = ["full"] }
-thiserror = { version = "1.0.42"}
-error-stack = "0.5.0"
-hex = "0.4.3"
-bigdecimal = "0.4.6"
-ethers = { version = "2.0.14", features = ["rustls"] }
-csv = "1.1.6"
+service = { path = "service" }
+graphql = { path = "graphql" }
+tokio = { version = "1.41.1", features = ["full", "rt"] }
+include_dir = {version = "0.6.2"}
+sqlx = { version = "0.7.4", features = [ "runtime-tokio-rustls", "macros", "json","rust_decimal", "chrono", "postgres"] }
+log = "0.4.22"
+env_logger = "0.11.5"
+dotenv = "0.15.0"
+#[workspace.dependencies]
+#service = { path = "service" }
+#chrono = "0.4.38"
+#serde = { version = "1.0.132", features = ["derive"] }
+#serde_json = { version = "1.0.68", features = ["raw_value"] }
+#reqwest = { version = "0.12.9", features = ["json"] }
+#tokio = { version = "1.16.1", features = ["full"] }
+#thiserror = { version = "2.0.3" }
+#error-stack = "0.5.0"
+#hex = "0.4.3"
+#bigdecimal = "0.4.6"
+#ethers = { version = "2.0.14", features = ["rustls"] }
+#csv = "1.1.6"

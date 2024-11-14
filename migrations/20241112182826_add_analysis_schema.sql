@@ -25,4 +25,4 @@ CREATE VIEW analysis.sp_500_annualized_return AS
             INNER JOIN stock_asset_allocation b
             ON (date_trunc('month', a.date) = date_trunc('month', b.date))
             AND a.return_1 > 0
-            AND b.percentage > 0
+            AND b.percentage > 0;

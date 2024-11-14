@@ -2,14 +2,14 @@
 name = "entity"
 version = "0.1.0"
 edition = "2021"
+publish = false
 
-[package.metadata.workspaces]
-independent = true
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+#[patch.crates-io]
+#libsqlite3-sys = { path = "./dummy-libsqlite3-sys" }
 
 [dependencies]
-sqlx = {workspace = true}
-chrono = { workspace = true }
-serde = { workspace = true }
-tokio = { workspace = true }
-serde_json = { workspace = true }
-reqwest = { workspace = true }
+serde = { version = "1.0.0", features = ["derive"] }
+sqlx = { version = "0.7.4", features = [ "runtime-async-std-rustls", "macros", "json","rust_decimal", "chrono", "postgres"] }
+chrono = { version = "0.4.19", features = ["serde"] }
+idna = "=1.0.2"
