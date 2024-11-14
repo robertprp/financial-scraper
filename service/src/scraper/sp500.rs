@@ -1,7 +1,6 @@
-use std::collections::{HashMap, HashSet};
 use std::io::Cursor;
 use calamine::{open_workbook_auto_from_rs, DataType, Reader};
-use chrono::{DateTime, Datelike, NaiveDate, TimeZone, Utc};
+use chrono::{DateTime, NaiveDate, TimeZone, Utc};
 use crate::scraper::Scraper;
 use rust_decimal::Decimal;
 use rust_decimal::prelude::FromPrimitive;
@@ -32,21 +31,6 @@ pub struct MonthlySp500Data {
 }
 impl SP500Scraper {
     pub async fn fetch_monthly() {
-        enum Headers {
-            Date = 0,
-            Close = 1,
-            Dividend = 2,
-            Earnings = 3,
-            CPI = 4,
-            DateFraction = 5,
-            GS10 = 6, // Long Interest Rate
-            AdjustedClose = 7,
-            RealDividend = 8,
-            TR = 9,
-            RealEarnings = 10,
-            TREarnings = 11,
-            PE10 = 12,
-        }
         let response = reqwest::get(XLS_URL).await.unwrap();
 
         let bytes = response.bytes().await.unwrap();
@@ -112,7 +96,7 @@ impl SP500Scraper {
                     continue;
                 }
 
-                let mut prev = &cloned_reversed_data[i - 1];
+                let prev = &cloned_reversed_data[i - 1];
                 let new_adjusted_close = if let Some(adj_close) = prev.adjusted_close {
                     let current_close = record.close.unwrap();
                     let prev_close = prev.close.unwrap();

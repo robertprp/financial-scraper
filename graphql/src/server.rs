@@ -1,12 +1,11 @@
-use async_graphql::ServerError;
 use axum::extract::State;
 use axum::http::HeaderMap;
 use axum::{serve, Router};
-use axum::routing::{get, post};
-use log::{error, info};
-use async_graphql_axum::{GraphQLProtocol, GraphQLRequest, GraphQLResponse, GraphQLWebSocket};
+use axum::routing::{get};
+use log::{info};
+use async_graphql_axum::{GraphQLRequest, GraphQLResponse};
 use axum::response::{Html, IntoResponse};
-use tower::{Layer, ServiceBuilder};
+use tower::{Layer};
 use crate::schema::{GQLSchema, ServiceSchema};
 use tower_http;
 use tower_http::cors;
@@ -55,7 +54,7 @@ async fn graphql_handler(
     headers: HeaderMap,
     gql_req: GraphQLRequest,
 ) -> GraphQLResponse {
-    let mut request = gql_req.into_inner();
+    let request = gql_req.into_inner();
 
     state.schema.execute(request).await.into()
 }

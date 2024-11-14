@@ -9,26 +9,10 @@ FROM ${RUST_IMAGE} as install
 
 RUN apt-get -y update && apt-get -y upgrade
 RUN apt-get install -y make git zlib1g-dev libssl-dev gperf php-cli cmake g++
-
-# Install cargo chef
-RUN cargo install cargo-chef --locked
-RUN mkdir build
-
 WORKDIR /app
-
-# -- Cache for builder --
-FROM install as planner
-COPY . .
-
-RUN cargo chef prepare --recipe-path recipe.json
 
 # -- Builder with cache layer --
 FROM install as builder
-
-COPY --from=planner /app/recipe.json recipe.json
-RUN cargo chef cook --release --workspace --recipe-path recipe.json
-
-# Build application
 COPY . .
 RUN cargo build --release --workspace
 
@@ -41,12 +25,11 @@ RUN apt-get update && apt-get install -y ca-certificates
 # -- Production Image --
 FROM base as prod
 WORKDIR /app
-COPY --from=builder /app/target/release/graphql /app/graphql
-COPY --from=install /usr/local/lib/libtd* /usr/local/lib/
+COPY --from=builder /app/target/release/financial-scraper /app/financial-scraper
+COPY --from=builder /app/.env /app/.env
 RUN ldconfig
-COPY ./.env ./.env
 
-WORKDIR /app
-
+# -- Copy migrations folder -
+COPY ./migrations /app/migrations
 # -- Run supervisord --
-CMD ["/usr/bin/supervisord"]
+ENTRYPOINT ["/app/financial-scraper"]

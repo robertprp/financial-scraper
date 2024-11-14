@@ -1,14 +1,12 @@
 use std::ops::{Div, Sub};
-use std::ptr::addr_eq;
-use async_graphql::{Context, MergedObject, MergedSubscription, Object, SimpleObject, Subscription};
+use async_graphql::{Context, MergedObject, Object, SimpleObject};
 use sqlx::types::chrono::{DateTime, Utc};
 use rust_decimal::{Decimal, MathematicalOps};
-use linreg::{linear_regression, linear_regression_of};
+use linreg::{linear_regression_of};
 use rust_decimal::prelude::FromPrimitive;
 use service::database::Database;
 use service::database::queries::Queries;
 use crate::format::convert_decimal_to_f32;
-use async_graphql::{OutputType};
 #[derive(Default)]
 pub struct StockToAssetAllocationQuery;
 

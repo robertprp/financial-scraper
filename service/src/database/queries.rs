@@ -1,4 +1,3 @@
-use std::io::Error;
 use chrono::{DateTime, Utc};
 use rust_decimal::Decimal;
 use sqlx::PgPool;

@@ -1,10 +1,7 @@
-use chrono::{DateTime, Duration, Utc};
-use reqwest::header::HeaderMap;
+use chrono::{DateTime, Utc};
 use yahoo_finance_api as yahoo;
 use yahoo_finance_api::time::OffsetDateTime;
-use yahoo_finance_api::{YResponse, YSearchResult, YSearchResultOpt, YahooError};
-use yahoo_finance_api::time::format_description::modifier::UnixTimestamp;
-use crate::scraper::sp500::SP500Scraper;
+use yahoo_finance_api::{YResponse, YSearchResult, YahooError};
 
 pub struct YahooFinanceClient(pub yahoo::YahooConnector);
 
