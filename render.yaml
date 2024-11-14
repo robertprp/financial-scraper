@@ -1,5 +1,5 @@
 services:
-  - type: docker-web
+  - type: web
     name: finance-web
     runtime: docker
     plan: standard
