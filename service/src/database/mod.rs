@@ -4,11 +4,10 @@ pub struct Database {
     db: sqlx::PgPool
 }
 
-const DATABASE_URL: &str = "postgres://postgres:postgres@postgres:5432/financial-scraper";
-
 impl Database {
     pub async fn new() -> Self {
-        let db = sqlx::PgPool::connect(DATABASE_URL)
+        let db_url = std::env::var("DATABASE_URL");
+        let db = sqlx::PgPool::connect(&db_url.unwrap())
             .await
             .expect("Failed to connect to database");
 

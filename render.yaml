@@ -3,4 +3,5 @@ services:
     name: finance-web
     runtime: docker
     plan: standard
+    
     startCommand: "docker compose -f docker/docker-compose.yaml up -d --build"
