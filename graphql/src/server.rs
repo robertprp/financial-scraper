@@ -25,7 +25,7 @@ impl Server {
 
         let app = self.router(app_state);
 
-        let address = "127.0.0.1:8001";
+        let address = "0.0.0.0:8001";
         info!("Starting server at {}", address);
         let listener = tokio::net::TcpListener::bind(address).await.unwrap();
         serve(listener, app.into_make_service()).await.unwrap();

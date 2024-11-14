@@ -4,7 +4,7 @@ pub struct Database {
     db: sqlx::PgPool
 }
 
-const DATABASE_URL: &str = "postgres://postgres:postgres@localhost:5432/financial-scraper";
+const DATABASE_URL: &str = "postgres://postgres:postgres@postgres:5432/financial-scraper";
 
 impl Database {
     pub async fn new() -> Self {

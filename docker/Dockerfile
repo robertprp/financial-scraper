@@ -9,10 +9,26 @@ FROM ${RUST_IMAGE} as install
 
 RUN apt-get -y update && apt-get -y upgrade
 RUN apt-get install -y make git zlib1g-dev libssl-dev gperf php-cli cmake g++
+# Install cargo chef
+RUN cargo install --version 0.1.62 cargo-chef --locked
+RUN mkdir build
+
 WORKDIR /app
+
+# -- Cache for builder --
+FROM install as planner
+COPY . .
+RUN rm -rf target/
+
+RUN cargo chef prepare --recipe-path recipe.json
 
 # -- Builder with cache layer --
 FROM install as builder
+
+COPY --from=planner /app/recipe.json recipe.json
+RUN cargo chef cook --release --workspace --recipe-path recipe.json
+
+# Build application
 COPY . .
 RUN cargo build --release --workspace
 
